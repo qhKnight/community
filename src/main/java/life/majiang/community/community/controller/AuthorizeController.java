@@ -8,6 +8,6 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public  String  index(@RequestParam(name ="code") String code,
                           @RequestParam(name = "state") String state) {
-        return "index";
+        return  "index";
     }
 }
