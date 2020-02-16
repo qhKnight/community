@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * Created by qhKnight on 2020/2/16
+ */
 @Controller
 public class IndexController {
     @GetMapping("/")
