@@ -4,9 +4,9 @@ package life.majiang.community.community.dto;
  * Created by qhKnight on 2020/2/16
  */
 public class GithubUser {
-    private  String  name;
-    private  String bio;
-    private  long  id;
+    private String name;
+    private String bio;
+    private long id;
 
     public String getName() {
         return name;

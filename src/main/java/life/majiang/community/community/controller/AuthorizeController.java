@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuthorizeController {
     @Autowired
     GithubProvider githubProvider;
+
     @GetMapping("/callback")
-    public  String  index(@RequestParam(name ="code") String code,
-                          @RequestParam(name = "state") String state) {
+    public String index(@RequestParam(name = "code") String code,
+                        @RequestParam(name = "state") String state) {
         AccessTokenDto accessTokenDto = new AccessTokenDto();
         accessTokenDto.setCode(code);
         accessTokenDto.setState(state);
@@ -27,6 +28,6 @@ public class AuthorizeController {
         String accessToken = githubProvider.getAccessTokenDto(accessTokenDto);
         GithubUser githubUser = githubProvider.getUser(accessToken);
         System.out.println(githubUser.getName());
-        return  "index";
+        return "index";
     }
 }
