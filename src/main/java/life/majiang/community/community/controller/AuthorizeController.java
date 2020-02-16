@@ -1,6 +1,7 @@
 package life.majiang.community.community.controller;
 
 import life.majiang.community.community.dto.AccessTokenDto;
+import life.majiang.community.community.dto.GithubUser;
 import life.majiang.community.community.provider.GithubProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,9 @@ public class AuthorizeController {
         accessTokenDto.setClient_id("8085b33655ffaba0c283");
         accessTokenDto.setClient_secret("a23ebd33bb80676b1ce1134d1d21c5ec5428b8a4");
         accessTokenDto.setRedirect_uri("http://localhost:8080/callback");
-        githubProvider.getAccessTokenDto(accessTokenDto);
-
+        String accessToken = githubProvider.getAccessTokenDto(accessTokenDto);
+        GithubUser githubUser = githubProvider.getUser(accessToken);
+        System.out.println(githubUser.getName());
         return  "index";
     }
 }
