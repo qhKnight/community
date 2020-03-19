@@ -18,11 +18,12 @@
     
 ### 代码区块
 
-```javascript
- $(document).ready(function () {
-           alert('RUNOOB');
-
-           });
+```java
+ public class HelloWorld {
+     public static void main(String[] args) {
+         System.out.println("Hello World");
+     }
+ }
 ```
     
   
