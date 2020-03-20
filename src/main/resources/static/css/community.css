@@ -1,3 +1,17 @@
+.all {
+    margin: 40px;
+    background-color: white;
+}
+body {
+    background-color: #efefef;
+}
+.btn-publish {
+    float: right;
+    margin-bottom: 15px;
+}
+
+
+/*
 body {
     background-color: #efefef;
 }
@@ -169,4 +183,4 @@ body {
 
 .red {
     color: red !important;
-}
+}*/
