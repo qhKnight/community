@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLOutput;
 import java.util.UUID;
 
@@ -38,7 +40,7 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String index(@RequestParam(name = "code") String code,
                         @RequestParam(name = "state") String state,
-                        HttpServletRequest requext) {
+                        HttpServletResponse response) {
         AccessTokenDto accessTokenDto = new AccessTokenDto();
         accessTokenDto.setCode(code);
         accessTokenDto.setState(state);
@@ -49,13 +51,23 @@ public class AuthorizeController {
         GithubUser githubUser = githubProvider.getUser(accessToken);
         if (githubUser != null) {
             User user = new User();
-            user.setAccountId(String.valueOf(githubUser.getId()));
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
+            String accountId = String.valueOf(githubUser.getId());
+            user.setAccountId(accountId);
             user.setName(githubUser.getName());
-            user.setToken(UUID.randomUUID().toString());
+            // user.setToken(UUID.randomUUID().toString());
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+           /* User user1 = new User();
+            user1 = userMapper.findByAccountId(accountId);*/
+            /*  if (user1 == null) {*/
             userMapper.insert(user);
-            requext.getSession().setAttribute("user", githubUser);
+            /*}*/
+
+            response.addCookie(new Cookie("token", token));
+            /*requext.getSession().setAttribute("user", githubUser)*/
+            ;
             return "redirect:/";
         } else {
             return "redirect:/";
